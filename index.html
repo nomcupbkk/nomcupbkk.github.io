@@ -13,17 +13,19 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <style>
-  html,body{margin:0;height:100%;background:#C8102E;overflow:hidden}
-  /* แถบสถานะด้านบนเป็นสีแดง และพื้นที่ปุ่มโฮมด้านล่างเป็นสีครีมให้กลืนกับแถบเมนูของแอพ */
-  body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:env(safe-area-inset-bottom);background:#FBF6EE}
-  iframe{position:fixed;left:0;right:0;top:env(safe-area-inset-top);bottom:env(safe-area-inset-bottom);
-         width:100%;height:calc(100% - env(safe-area-inset-top) - env(safe-area-inset-bottom));border:0;background:#FBF6EE}
+  /* พื้นหลังสีครีมให้กลืนกับแถบเมนูของแอพ · แถบสถานะด้านบนเป็นสีแดง */
+  html,body{margin:0;height:100%;background:#FBF6EE;overflow:hidden}
+  .top{position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top);background:#C8102E;z-index:2}
+  /* แอพจัดการพื้นที่ปุ่มโฮมด้านล่างเอง จึงให้กรอบยาวถึงขอบล่างของจอ */
+  iframe{position:fixed;left:0;right:0;top:env(safe-area-inset-top);bottom:0;width:100%;
+         height:calc(100% - env(safe-area-inset-top));border:0;background:#C8102E}
   .load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
-        color:#fff;font:600 16px -apple-system,system-ui,sans-serif;z-index:-1}
+        background:#C8102E;color:#fff;font:600 16px -apple-system,system-ui,sans-serif;z-index:-1}
   .load img{width:96px;height:96px;border-radius:22px}
 </style>
 </head>
 <body>
+<div class="top"></div>
 <div class="load"><img src="icon-192.png" alt=""><span>กำลังเปิด Nomcup…</span></div>
 <!-- ลิงก์เว็บแอปจาก Apps Script (การทำให้ใช้งานได้ → จัดการ → URL ของเว็บแอป) -->
 <iframe src="https://script.google.com/macros/s/AKfycbwLyB6jaWWfrLiScQH5N7ombTO_yF3XE8EM80n27sWN5F_ionI8m1dbTtXo6QVRa9OC/exec"
