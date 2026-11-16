@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Nomcup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nomcup">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#B72B34">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  /* แถบสถานะด้านบน = สีหัวแอพ · แถบปุ่มโฮมด้านล่าง = สีขาวเดียวกับเมนูล่างของแอพ */
+  html,body{margin:0;height:100%;background:#FFFFFF;overflow:hidden}
+  .top{position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top);background:#B72B34;z-index:2}
+  .bot{position:fixed;left:0;right:0;bottom:0;height:env(safe-area-inset-bottom);background:#FFFFFF;z-index:2}
+  /* กรอบแอพอยู่ระหว่างแถบสถานะกับแถบปุ่มโฮมพอดี (ใช้ top/bottom อย่างเดียว ไม่กำหนด height กันจอเหลือช่องว่างล่าง) */
+  iframe{position:fixed;left:0;right:0;top:env(safe-area-inset-top);bottom:env(safe-area-inset-bottom);
+         width:100%;height:auto;border:0;background:#B72B34}
+  .load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
+        background:#B72B34;color:#fff;font:600 16px -apple-system,system-ui,sans-serif;z-index:-1}
+  .load img{width:96px;height:96px;border-radius:22px}
+</style>
+</head>
+<body>
+<div class="top"></div><div class="bot"></div>
+<div class="load"><img src="icon-192.png" alt=""><span>กำลังเปิด Nomcup…</span></div>
+<!-- ลิงก์เว็บแอปจาก Apps Script (การทำให้ใช้งานได้ → จัดการ → URL ของเว็บแอป) -->
+<iframe src="https://script.google.com/macros/s/AKfycbwLyB6jaWWfrLiScQH5N7ombTO_yF3XE8EM80n27sWN5F_ionI8m1dbTtXo6QVRa9OC/exec"
+        title="Nomcup หลังบ้าน" allow="clipboard-write"></iframe>
+</body>
+</html>
