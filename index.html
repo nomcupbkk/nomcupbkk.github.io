@@ -31,5 +31,22 @@
 <!-- ลิงก์เว็บแอปจาก Apps Script (การทำให้ใช้งานได้ → จัดการ → URL ของเว็บแอป) -->
 <div class="frame"><iframe src="https://script.google.com/macros/s/AKfycbwLyB6jaWWfrLiScQH5N7ombTO_yF3XE8EM80n27sWN5F_ionI8m1dbTtXo6QVRa9OC/exec"
         title="Nomcup หลังบ้าน" allow="clipboard-write"></iframe></div>
+<script>
+/* จำการเข้าสู่ระบบของแอพไว้ที่หน้านี้ (iPhone ล้างที่เก็บของกรอบแอพที่ซ้อนอยู่ข้างในบ่อย ทำให้ต้องใส่ PIN ใหม่)
+ * แอพในกรอบส่ง setToken / clearToken มาเก็บ และถาม getToken ตอนเปิดถ้าในกรอบไม่มี */
+(function () {
+  var KEY = 'nomcup_token';
+  var okOrigin = function (o) { return /^https:\/\/[\w-]+(-script)?\.googleusercontent\.com$/.test(o) || o === 'https://script.google.com'; };
+  var get = function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+  var put = function (v) { try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (e) {} };
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!okOrigin(e.origin) || !d || typeof d !== 'object') return;
+    if (d.nomcup === 'setToken' && typeof d.token === 'string' && /^[\w-]{20,60}$/.test(d.token)) put(d.token);
+    else if (d.nomcup === 'clearToken') put(null);
+    else if (d.nomcup === 'getToken' && e.source) e.source.postMessage({ nomcup: 'token', token: get() }, e.origin);
+  });
+})();
+</script>
 </body>
 </html>
